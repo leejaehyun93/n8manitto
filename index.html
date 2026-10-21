@@ -10,6 +10,20 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans','Noto Sans KR',sans-serif;font-size:15px;line-height:1.55}button,input,textarea,select{font:inherit}button{border:0;border-radius:10px;padding:11px 15px;background:var(--accent);color:white;font-weight:700;cursor:pointer}button:hover{filter:brightness(.95)}button.light{background:#f0f1ed;color:var(--text)}button.outline{background:white;color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
 .wrap{max-width:820px;margin:0 auto;padding:28px 18px 56px}.nav{display:flex;justify-content:space-between;align-items:center;padding-bottom:22px;border-bottom:1px solid var(--line)}.brand{font-weight:700;letter-spacing:-.4px;font-size:17px}.brand span{color:var(--accent)}.nav small{color:var(--muted)}.intro{padding:34px 0 25px}.eyebrow{font-size:11px;letter-spacing:1.8px;color:var(--accent);font-weight:700}.intro h1{font-size:clamp(30px,5vw,43px);letter-spacing:-1.5px;line-height:1.2;margin:10px 0}.intro p{margin:0;color:var(--muted);max-width:530px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:5px 0 18px}.tab{background:transparent;border:1px solid var(--line);color:var(--muted);padding:9px 13px;border-radius:9px}.tab.active{background:var(--accent2);border-color:#c9d9ce;color:var(--accent)}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:14px}.panel h2{font-size:18px;letter-spacing:-.4px;margin:0 0 5px}.desc{color:var(--muted);font-size:13px;margin:0 0 17px}.field{margin:13px 0}.field label{display:block;font-weight:600;font-size:13px;margin-bottom:6px}.field input,.field textarea,.field select{display:block;width:100%;border:1px solid #dfe1da;border-radius:9px;background:white;padding:12px 13px;outline-color:#88a997}.field textarea{min-height:95px;resize:vertical}.row{display:flex;gap:9px;flex-wrap:wrap}.row>*{flex:1}.small{font-size:12px;color:var(--muted)}.status{padding:12px 14px;background:var(--accent2);color:#2c4c38;border-radius:10px;margin-top:12px;white-space:pre-wrap;font-size:13px}.status.error{background:#fff0ed;color:#873d30}.hidden{display:none!important}.result{margin-top:15px;background:#f5f8f5;border:1px solid #dce7df;border-radius:12px;padding:20px;text-align:center}.result .name{font-size:30px;font-weight:700;letter-spacing:-.8px;margin:5px 0}.line{height:1px;background:var(--line);margin:18px 0}.item{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item strong{font-size:14px}.item p{margin:4px 0 0;font-size:13px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}.badge{display:inline-block;padding:4px 8px;background:#f0f1ed;color:#60645d;border-radius:6px;font-size:11px}.adminhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:28px}.secondary{color:var(--muted)}.subhead{font-size:15px;margin:20px 0 6px}.callout{border-left:3px solid var(--accent);padding:8px 13px;background:var(--accent2);font-size:13px;margin:12px 0;border-radius:0 9px 9px 0}.actionbar{display:flex;align-items:center;gap:10px;justify-content:space-between}.actionbar button{flex-shrink:0}
 @media(max-width:560px){.wrap{padding:18px 13px 40px}.panel{padding:17px}.intro{padding-top:28px}.row{flex-direction:column}.nav small{max-width:140px;text-align:right}}
+
+/* v2 admin event screen: stable participant colors + scannable rows */
+.person-tag{display:inline-flex;align-items:center;max-width:100%;padding:3px 9px;border-radius:7px;border:1px solid;font-size:13px;font-weight:700;white-space:nowrap}
+.c0{background:#eaf1ff;color:#2254a2;border-color:#c5d6f7}.c1{background:#fcebec;color:#a12e49;border-color:#f2c8d1}.c2{background:#e8f6e8;color:#247044;border-color:#bbddc2}.c3{background:#fff3d6;color:#805500;border-color:#f1daa1}
+.c4{background:#f0eafb;color:#6543a0;border-color:#d6c6f2}.c5{background:#e6f7f7;color:#1d6971;border-color:#b7dfe0}.c6{background:#fdece3;color:#9c4d1c;border-color:#ecc8b0}.c7{background:#f2f2f2;color:#4b5563;border-color:#d3d6da}
+.c8{background:#fbe9f7;color:#8c3679;border-color:#ebc2e0}.c9{background:#e7f4e2;color:#446f23;border-color:#cae4bb}.c10{background:#fff0f4;color:#a6355d;border-color:#f0c7d3}.c11{background:#e8effd;color:#415aa6;border-color:#c8d3f0}
+.mapping-row,.live-row{padding:12px 0;border-bottom:1px solid var(--line)}.mapping-row:last-child,.live-row:last-child{border-bottom:0}
+.mapping-main{display:flex;align-items:center;flex-wrap:wrap;gap:8px;line-height:2}.role-label{font-size:11px;color:#60645d;font-weight:600}
+.live-meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.9}.ok-mark{color:#18643e;font-weight:800}.no-mark{color:#a83a36;font-weight:800}
+.quick-find{width:100%;border:1px solid #bccfc0;border-radius:10px;padding:13px;font-size:15px;outline-color:#88a997;background:#f9fcfa}
+.section-note{color:var(--muted);font-size:12px;margin:5px 0 10px}.pill-count{border:1px solid #c7d9ce;border-radius:999px;padding:2px 8px;font-size:12px;color:#315f45;background:#f0f7f1}
+.mapping-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.mapping-cell{background:#f8faf8;border:1px solid #e9eeea;border-radius:8px;padding:8px}
+.mapping-cell .small{display:block;margin-bottom:5px} .mapping-cell .person-tag{white-space:normal}
+@media(max-width:560px){.mapping-grid{grid-template-columns:1fr}}
 </style>
 </head><body><main class="wrap">
 <header class="nav"><div class="brand"><span>●</span> secret pal</div><small>조용한 친절을 모으는 곳</small></header>
@@ -17,12 +31,13 @@
 <div class="tabs"><button class="tab active" id="tabUser" onclick="showView('user')">참가자</button><button class="tab" id="tabAdmin" onclick="showView('admin')">관리자</button></div>
 <div id="configWarning" class="panel hidden"><h2>연결 설정이 필요해요</h2><p class="desc">배포 전 <code>index.html</code> 상단의 SUPABASE_PROJECT_URL, SUPABASE_PUBLISHABLE_KEY를 설정해 주세요.</p></div>
 <section id="userView">
-  <div class="panel" id="userLoginPanel"><h2>참가자 로그인</h2><p class="desc">운영자에게 받은 모임 코드와 닉네임을 입력해 주세요.</p>
+  <div class="panel" id="userLoginPanel"><h2>참가자 로그인</h2><p class="desc">운영자에게 받은 모임 코드와 닉네임, 나만의 숫자 4자리 비밀번호를 입력해 주세요. 첫 참가 시 비밀번호가 등록됩니다.</p>
     <div class="field"><label for="userRoom">모임 코드 (8자리)</label><input id="userRoom" maxlength="8" autocapitalize="characters" placeholder="예: AB3D5EF7"></div>
     <div class="field"><label for="userName">닉네임</label><input id="userName" maxlength="30" placeholder="모임에서 사용하는 닉네임"></div>
+    <div class="field"><label for="userPin">개인 비밀번호 (숫자 4자리)</label><input id="userPin" type="password" inputmode="numeric" pattern="[0-9]{4}" autocomplete="new-password" maxlength="4" placeholder="예: 0426"></div>
     <button id="userLoginBtn" onclick="userLogin()">참가하기 / 로그인</button>
     <div id="userStatus" class="status hidden"></div>
-    <p class="small">같은 닉네임을 아는 사람도 로그인할 수 있어요. 비밀 유지가 중요한 모임에서는 개인 인증을 추가해야 합니다.</p>
+    <p class="small">비밀번호는 본인이 기억해야 해요. 기존 참가자는 관리자에게 PIN 설정을 요청해야 합니다. 숫자 4자리는 강력한 본인 인증 수단이 아니므로 비밀을 공유하지 마세요.</p>
   </div>
   <div id="userDashboard" class="hidden">
     <div class="panel"><div class="actionbar"><h2 id="userGreeting">참가자</h2><button class="light" onclick="logout()">로그아웃</button></div><p class="desc" id="myRoomBadge"></p><button id="userRefreshBtn" class="outline" onclick="refreshParticipant()">추첨 상태 새로고침</button></div>
@@ -33,9 +48,9 @@
       <div class="field"><label for="goodDeed">선행 내용</label><textarea id="goodDeed" maxlength="1000" placeholder="예: 힘들어 보여서 간식을 챙겨줬어요."></textarea></div>
       <button id="sendDeedBtn" onclick="sendDeed()">운영자에게 보내기</button><div id="deedStatus" class="status hidden"></div>
     </div>
-    <div class="panel"><h2>나를 챙기는 마니또 맞히기</h2><p class="desc">누가 내 마니또인지 한 번만 추측해 보세요. 정답 여부는 운영자에게만 표시됩니다.</p>
+    <div class="panel"><h2>나를 챙기는 마니또 맞히기</h2><p class="desc">누가 내 마니또인지 최대 두 번 추측할 수 있어요. 정답 여부는 운영자에게만 표시됩니다.</p>
       <div class="field"><label for="guessName">나를 챙기는 사람은?</label><select id="guessName"><option value="">닉네임 선택</option></select></div>
-      <div class="small" id="guessHint">추측은 한 번 제출하면 변경할 수 없습니다.</div>
+      <div class="small" id="guessHint">추측 기회는 총 2번이며 제출한 답은 변경할 수 없습니다.</div>
       <div style="margin-top:13px"><button id="guessButton" onclick="submitGuess()">추측 제출하기</button></div><div id="guessStatus" class="status hidden"></div>
     </div>
   </div>
@@ -60,14 +75,17 @@
       <div class="field"><label>참가자 초대 링크</label><input id="inviteUrl" readonly></div>
       <div class="row"><button onclick="copyInvite()">초대 링크 복사</button><button class="light" onclick="copyRoomCode()">모임 코드 복사</button></div>
       <div id="dashboardStatus" class="status hidden"></div>
+      <div class="line"></div><h2>진행자 빠른 검색</h2><p class="desc">닉네임을 검색하면 배정·선행 메시지·추측 현황을 한꺼번에 좁혀 볼 수 있어요.</p>
+      <input class="quick-find" id="adminSearch" oninput="renderAdminLists()" placeholder="찾을 닉네임 입력 (예: 바다)" autocomplete="off">
+      <p class="section-note">명단 옆 'PIN 설정/변경'은 관리자가 참가자의 숫자 4자리 비밀번호를 지정해 주는 기능입니다.</p>
       <div class="line"></div><h2>참가자 명단</h2><p class="desc">참가자는 초대 링크에서 닉네임으로 등록됩니다. 추첨 후 새 참가자 등록은 마감됩니다.</p><div id="participantList"></div>
       <div class="line"></div><div class="row"><button id="drawButton" onclick="runDraw()">마니또 추첨 / 재추첨</button><button class="light" onclick="downloadCSV()">관리 결과 CSV</button></div>
       <p class="small">재추첨은 첫 추측 제출 전까지만 가능합니다. 이미 본 배정이 바뀔 수 있으니 신중하게 진행하세요.</p>
-      <div class="line"></div><h2>관리자 전용 배정 결과</h2><div id="assignmentList"></div>
+      <div class="line"></div><h2>관리자 전용 배정 결과</h2><p class="desc">색상은 같은 참가자를 뜻해요. 누가 누구를 챙기는지, 역방향 관계까지 빠르게 확인하세요.</p><div id="assignmentList"></div>
     </div>
     <div class="panel"><h2>선행 메시지 관리</h2><p class="desc">참가자가 남긴 기록은 관리자에게만 표시됩니다. 최근 500건을 보여줍니다.</p><div id="deedList"></div></div>
-    <div class="panel"><h2>마니또 추측 현황</h2><p class="desc">정답 여부는 참가자에게 표시되지 않고 관리자에게만 공개됩니다.</p><div id="guessList"></div></div>
-    <button class="outline" id="refreshBtn" onclick="refreshAdmin()">관리 화면 새로고침</button>
+    <div class="panel"><h2>마니또 추측 현황</h2><p class="desc">참가자별 최대 2회 추측입니다. 1차/2차 순서와 정답 여부는 관리자에게만 공개됩니다.</p><div id="guessList"></div></div>
+    <button class="outline" id="refreshBtn" onclick="refreshAdmin()">관리 화면 새로고침</button><p class="small">관리자 화면은 열려 있는 동안 약 15초마다 자동으로 갱신됩니다. 발표 중 즉시 확인하려면 위 버튼을 누르세요.</p>
   </div>
 </section>
 <div class="foot">N8 secret pal · 참가자의 추측 정답 여부는 비밀로 유지됩니다.</div>
@@ -112,8 +130,8 @@ function authPanels(){
 }
 async function userLogin(){
   await busy('userLoginBtn',async()=>{try{
-    const data=await api('participant_login',{invite_code:$('userRoom').value.trim(),nickname:$('userName').value.trim()},null);
-    establish('participant',data);authPanels();await refreshParticipant();
+    const data=await api('participant_login',{invite_code:$('userRoom').value.trim(),nickname:$('userName').value.trim(),participant_pin:$('userPin').value},null);
+    establish('participant',data);$('userPin').value='';authPanels();await refreshParticipant();
   }catch(e){msg('userStatus',e.message,true);}});
 }
 async function adminLogin(){
@@ -135,9 +153,11 @@ async function refreshParticipant(){
     $('userGreeting').textContent=participantData.nickname+'님, 안녕하세요!';
     $('myRoomBadge').textContent=participantData.room_name+(participantData.has_draw?' · 추첨 완료':' · 추첨 대기 중');
     $('guessName').innerHTML='<option value="">닉네임 선택</option>'+participantData.participants.map(p=>`<option value="${esc(p.id)}">${esc(p.nickname)}</option>`).join('');
-    $('guessName').disabled=participantData.guessed||!participantData.has_draw;
-    $('guessButton').disabled=participantData.guessed||!participantData.has_draw;
-    $('guessHint').textContent=participantData.guessed?'이미 추측을 제출했어요. 변경할 수 없습니다.':participantData.has_draw?'추측은 한 번 제출하면 변경할 수 없습니다.':'운영자가 추첨하면 제출할 수 있어요.';
+    const used=Math.max(0,Math.min(2,Number(participantData.guess_count)||0));
+    $('guessName').disabled=used>=2||!participantData.has_draw;
+    $('guessButton').disabled=used>=2||!participantData.has_draw;
+    $('guessButton').textContent=used>=2?'2회 추측 완료':`${used+1}차 추측 제출하기`;
+    $('guessHint').textContent=used>=2?'추측 기회 2번을 모두 사용했어요.':participantData.has_draw?`현재 ${used}/2회 사용 · 남은 기회 ${2-used}회 · 제출 후 변경 불가`:'운영자가 추첨하면 제출할 수 있어요.';
     hide('palResult');
   }catch(e){msg('userStatus',e.message,true);if(e.message.includes('로그인'))await logout();}
 }
@@ -154,7 +174,8 @@ async function sendDeed(){
   }catch(e){msg('deedStatus',e.message,true);}});
 }
 async function submitGuess(){
-  if(!confirm('추측은 단 한 번만 제출할 수 있어요. 제출할까요?'))return;
+  const used=Number(participantData?.guess_count)||0;
+  if(!confirm(`${used+1}번째 추측을 제출할까요? 총 2번의 기회가 있으며 제출한 답은 변경할 수 없습니다.`))return;
   await busy('guessButton',async()=>{try{
     await api('submit_guess',{guessed_participant_id:$('guessName').value});
     msg('guessStatus','추측을 접수했어요. 정답 여부는 운영자에게만 공개됩니다.');
@@ -162,17 +183,55 @@ async function submitGuess(){
   }catch(e){msg('guessStatus',e.message,true);}});
 }
 function datefmt(s){return s?new Date(s).toLocaleString('ko-KR'):'-';}
+function colorClass(id){
+  const index=(adminData?.participants??[]).findIndex(p=>p.id===id);
+  return 'c'+(index<0?7:index%12);
+}
+function chip(name,id){return `<span class="person-tag ${colorClass(id)}">${esc(name??'?')}</span>`;}
+function matchesAdminSearch(...values){
+  const q=$('adminSearch').value.trim().toLocaleLowerCase();
+  return !q || values.some(v=>String(v??'').toLocaleLowerCase().includes(q));
+}
+function renderAdminLists(){
+  if(!adminData)return;
+  const targets=new Map(adminData.assignments.map(a=>[a.giver_id,a]));
+  const givers=new Map(adminData.assignments.map(a=>[a.receiver_id,a]));
+  const people=adminData.participants.filter(p=>matchesAdminSearch(p.nickname));
+  $('participantList').innerHTML=people.length?people.map(p=>{
+    const own=targets.get(p.id), incoming=givers.get(p.id);
+    const guesses=adminData.guesses.filter(g=>g.participant_id===p.id);
+    return `<div class="mapping-row"><div class="mapping-main">${chip(p.nickname,p.id)} <span class="pill-count">추측 ${guesses.length}/2</span> <span class="badge">${p.has_pin?'PIN 설정됨':'PIN 미설정'}</span><button class="light" style="padding:5px 9px;font-size:12px" onclick="setParticipantPin('${esc(p.id)}')">PIN 설정/변경</button></div>
+      <div class="mapping-grid"><div class="mapping-cell"><span class="small">이 사람이 챙기는 사람</span>${own?chip(own.receiver,own.receiver_id):'<span class="small">추첨 대기</span>'}</div>
+      <div class="mapping-cell"><span class="small">이 사람을 챙기는 사람 (관리자 전용)</span>${incoming?chip(incoming.giver,incoming.giver_id):'<span class="small">추첨 대기</span>'}</div></div></div>`;
+  }).join(''):'<p class="small">일치하는 참가자가 없습니다.</p>';
+  const assignments=adminData.assignments.filter(a=>matchesAdminSearch(a.giver,a.receiver));
+  $('assignmentList').innerHTML=assignments.length?assignments.map(a=>`<div class="mapping-row"><div class="mapping-main"><span class="role-label">챙기는 사람</span>${chip(a.giver,a.giver_id)} <span aria-hidden="true">→</span> <span class="role-label">챙김 받는 사람</span>${chip(a.receiver,a.receiver_id)}</div></div>`).join(''):'<p class="small">해당하는 배정이 없어요.</p>';
+  const messages=adminData.messages.filter(m=>matchesAdminSearch(m.nickname,m.target_nickname,m.message));
+  $('deedList').innerHTML=messages.length?messages.map(m=>`<div class="live-row"><div class="mapping-main">${chip(m.nickname,m.participant_id)} <span class="role-label">→ 챙기는 대상</span> ${m.target_nickname?chip(m.target_nickname,targets.get(m.participant_id)?.receiver_id):'<span class="small">미배정</span>'}</div><p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 2px">${esc(m.message)}</p><div class="small">${esc(datefmt(m.created_at))}</div></div>`).join(''):'<p class="small">해당하는 선행 메시지가 없어요.</p>';
+  const guesses=adminData.guesses.filter(g=>matchesAdminSearch(g.participant,g.guessed));
+  $('guessList').innerHTML=guesses.length?guesses.map(g=>`<div class="live-row"><div class="mapping-main"><span class="pill-count">${Number(g.attempt_no)||1}차 / 2회</span>${chip(g.participant,g.participant_id)} <span class="role-label">→ 추측한 사람</span> ${chip(g.guessed,g.guessed_id)} <span class="${g.correct?'ok-mark':'no-mark'}">${g.correct?'✓ 정답':'✕ 오답'}</span></div><div class="small">${esc(datefmt(g.created_at))}</div></div>`).join(''):'<p class="small">해당하는 추측 기록이 없어요.</p>';
+}
+async function setParticipantPin(participantId){
+  if(!adminData)return;
+  const person=adminData.participants.find(p=>p.id===participantId);
+  if(!person)return;
+  const pin=prompt(`${person.nickname} 님에게 설정할 새로운 숫자 4자리 비밀번호를 입력하세요.\n변경하면 해당 참가자는 모든 기기에서 다시 로그인해야 합니다.`);
+  if(pin===null)return;
+  if(!/^\d{4}$/.test(pin)){msg('dashboardStatus','비밀번호는 숫자 정확히 4자리여야 해요.',true);return;}
+  if(person.has_pin&&!confirm(`${person.nickname} 님의 기존 비밀번호를 변경할까요?`))return;
+  try{
+    await api('admin_set_participant_pin',{participant_id:participantId,participant_pin:pin});
+    await refreshAdmin();
+    msg('dashboardStatus',`${person.nickname} 님의 PIN 설정을 완료했어요. 참가자에게 안전하게 전달해 주세요.`);
+  }catch(e){msg('dashboardStatus',e.message,true);}
+}
 async function refreshAdmin(){
   await busy('refreshBtn',async()=>{try{
     adminData=await api('admin_overview');
     $('adminRoomTitle').textContent=adminData.room_name;
     $('adminCount').textContent=`참가 ${adminData.participants.length}명 · ${adminData.assignments.length?'추첨 완료':'추첨 대기'}`;
     $('inviteUrl').value=location.href.split('?')[0]+'?room='+encodeURIComponent(adminData.invite_code);
-    const targets=new Map(adminData.assignments.map(x=>[x.giver_id,x.receiver]));
-    $('participantList').innerHTML=adminData.participants.length?adminData.participants.map(p=>`<div class="item"><div><strong>${esc(p.nickname)}</strong><p>${targets.has(p.id)?'배정 완료':'추첨 대기'}</p></div><span class="badge">참가</span></div>`).join(''):'<p class="small">아직 참가자가 없습니다.</p>';
-    $('assignmentList').innerHTML=adminData.assignments.length?adminData.assignments.map(x=>`<div class="item"><div><strong>${esc(x.giver)}</strong><p>→ ${esc(x.receiver)} 님을 챙깁니다</p></div><span class="badge">관리자 전용</span></div>`).join(''):'<p class="small">아직 추첨 전이에요.</p>';
-    $('deedList').innerHTML=adminData.messages.length?adminData.messages.map(m=>`<div class="item"><div><strong>${esc(m.nickname)}</strong><p>${esc(m.message)}</p></div><span class="small">${esc(datefmt(m.created_at))}</span></div>`).join(''):'<p class="small">아직 받은 메시지가 없습니다.</p>';
-    $('guessList').innerHTML=adminData.guesses.length?adminData.guesses.map(g=>`<div class="item"><div><strong>${esc(g.participant)}</strong><p>나의 마니또로 ${esc(g.guessed)} 님을 추측 · ${g.correct?'정답':'오답'}</p></div><span class="small">${esc(datefmt(g.created_at))}</span></div>`).join(''):'<p class="small">아직 추측한 참가자가 없습니다.</p>';
+    renderAdminLists();
     $('drawButton').disabled=!adminData.can_redraw;
     if(!adminData.can_redraw) $('drawButton').title='추측 제출 후에는 재추첨할 수 없습니다.';
     authPanels();
@@ -191,7 +250,7 @@ function copyInvite(){copyString($('inviteUrl').value,'초대 링크를 복사�
 function copyRoomCode(){if(adminData)copyString(adminData.invite_code,'모임 코드를 복사했어요.');}
 function downloadCSV(){
   if(!adminData)return;
-  const rows=[['참가자','챙길 마니또'],...adminData.assignments.map(a=>[a.giver,a.receiver]),[],['추측한 사람','추측한 닉네임','정답 여부','제출 시각'],...adminData.guesses.map(g=>[g.participant,g.guessed,g.correct?'정답':'오답',g.created_at]),[],['선행 메시지 작성자','선행 내용','시각'],...adminData.messages.map(m=>[m.nickname,m.message,m.created_at])];
+  const rows=[['참가자','챙길 마니또'],...adminData.assignments.map(a=>[a.giver,a.receiver]),[],['추측한 사람','회차','추측한 닉네임','정답 여부','제출 시각'],...adminData.guesses.map(g=>[g.participant,g.attempt_no,g.guessed,g.correct?'정답':'오답',g.created_at]),[],['선행 메시지 작성자','선행 내용','시각'],...adminData.messages.map(m=>[m.nickname,m.message,m.created_at])];
   // Prefix formula-looking CSV fields so spreadsheet apps do not execute formulas.
   const csv='\ufeff'+rows.map(row=>row.map(value=>{let s=String(value??'');if(/^[\s]*[=+\-@]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}).join(',')).join('\r\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='n8-manitto-admin.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
@@ -206,5 +265,11 @@ async function resume(){
   catch{await logout();}
 }
 resume();
+// A lightweight refresh for the host during the reveal event. Only when visible.
+setInterval(()=>{
+  if(active?.role==='admin' && document.visibilityState==='visible' && !$('refreshBtn').disabled){
+    refreshAdmin();
+  }
+},15000);
 </script>
 </body></html>
