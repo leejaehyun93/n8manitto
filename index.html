@@ -401,7 +401,13 @@ async function refreshAdmin(){
     adminData=await api('admin_overview');
     $('adminRoomTitle').textContent=adminData.room_name;
     $('adminCount').textContent=`참가 ${adminData.participants.length}명 · ${adminData.assignments.length?'추첨 완료':'추첨 대기'}`;
-    $('inviteUrl').value=location.href.split('?')[0]+'?room='+encodeURIComponent(adminData.invite_code);
+ 
+const inviteLink = new URL(location.href);
+inviteLink.hash = '';
+inviteLink.search = '';
+inviteLink.searchParams.set('room', adminData.invite_code);
+$('inviteUrl').value = inviteLink.toString();
+
     renderAdminLists();
     $('drawButton').disabled=!adminData.can_redraw;
     if(!adminData.can_redraw) $('drawButton').title='추측 제출 후에는 재추첨할 수 없습니다.';
@@ -429,7 +435,18 @@ function downloadCSV(){
 async function logout(){const old=active;active=null;participantData=null;adminData=null;sessionStorage.removeItem(STORE);authPanels();if(old?.token)try{await api('logout',{},old.token);}catch{};}
 async function resume(){
   if(!configured())$('configWarning').classList.remove('hidden');
-  const params=new URLSearchParams(location.search);if(params.has('room'))$('userRoom').value=params.get('room').toUpperCase();
+
+const params = new URLSearchParams(location.search);
+const legacyHashQuery = location.hash.includes('?')
+  ? location.hash.slice(location.hash.indexOf('?') + 1)
+  : '';
+const roomFromInvite = params.get('room')
+  || new URLSearchParams(legacyHashQuery).get('room');
+
+if (roomFromInvite) {
+  $('userRoom').value = roomFromInvite.trim().toUpperCase();
+}
+
   try{active=JSON.parse(sessionStorage.getItem(STORE)||'null');}catch{active=null;}
   if(!active||!active.token||Date.parse(active.expires_at)<=Date.now()){active=null;sessionStorage.removeItem(STORE);authPanels();return;}
   authPanels();try{if(active.role==='admin')await refreshAdmin();else if(active.role==='participant')await refreshParticipant();else await logout();}
