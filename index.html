@@ -55,8 +55,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .hero-copy{position:relative;z-index:1}
 .hero-kicker{font-size:12px;font-weight:900;letter-spacing:1.7px;color:var(--navy);display:flex;gap:8px;align-items:center}
 .hero-kicker-dot{width:10px;height:10px;display:inline-block;background:var(--yellow);border:2px solid var(--navy);border-radius:50%}
-.hero h1{font-family:'Black Han Sans','Noto Sans KR',sans-serif;line-height:1.14;letter-spacing:-2.5px;font-size:clamp(44px,6.3vw,76px);font-weight:900;color:var(--navy);margin:22px 0 24px}
-.hero h1 span{color:#fff9e8;text-shadow:4px 5px 0 var(--navy),-1px 0 0 var(--navy),0 -1px 0 var(--navy)}
+.hero h1{font-family:'Noto Sans KR',sans-serif;line-height:1.27;letter-spacing:-1.5px;font-size:clamp(40px,5.65vw,67px);font-weight:800;color:var(--navy);margin:20px 0 24px;word-break:keep-all}
+.hero h1 span{display:inline-block;color:var(--navy);background:var(--yellow);padding:0 .13em .07em;border-radius:.14em;text-shadow:none;box-shadow:4px 5px 0 rgba(20,34,54,.13)}
 .hero-question{font-weight:900;font-size:clamp(20px,2.65vw,29px);line-height:1.55;letter-spacing:-1.2px;margin:0 0 25px;color:var(--navy)}
 .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
 .hero-link{color:var(--navy);font-weight:900;text-decoration:none;display:inline-flex;gap:18px;align-items:center;background:var(--yellow);padding:13px 21px;border:2px solid var(--navy);border-radius:12px;box-shadow:4px 4px 0 var(--navy);transition:transform .15s}
@@ -124,15 +124,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .polaroid figcaption span{color:#d96519}
 .polaroid-first{transform:rotate(-3deg)}.polaroid-second{transform:rotate(2.5deg)}.polaroid-third{transform:rotate(-1.3deg)}
 .photo-tape{position:absolute;width:61px;height:22px;top:-14px;left:50%;transform:translateX(-50%) rotate(-4deg);background:#ffd65dba;border:1px solid #ffd65d99;z-index:2}
-.moments-fine{color:#aab2c0;font-size:10px;text-align:right;margin:10px 0 0;line-height:1.7}
+
 .foot{display:flex;align-items:center;flex-direction:column;gap:3px;color:#19243a;margin:0;padding:0 10px 38px}
 .foot img{display:block;width:158px;height:auto;background:#12213a;padding:7px 9px;border-radius:8px;margin-bottom:8px}
 .foot p{font-size:12px;font-weight:900;margin:0}.foot small{font-size:11px;color:#523f32;margin-top:3px}
+.foot .creator{margin:22px 0 0;padding:12px 22px;border-top:2px solid rgba(18,33,58,.45);font-size:17px;letter-spacing:.3px;font-weight:700;color:var(--navy)}
+.foot .creator strong{font-size:23px;font-weight:800;letter-spacing:-.4px;margin-left:8px}.foot .creator span{color:#ffe457;font-size:19px;text-shadow:1px 1px 0 var(--navy)}
 body:has(#adminView:not(.hidden)) .site-extras{display:none}
 @media(max-width:800px){
  .wrap{padding:0 18px}.nav{margin:0 -18px;padding:10px 18px}
  .hero{gap:20px;padding:48px 0 41px;grid-template-columns:minmax(0,1fr) 250px}
- .hero h1{font-size:clamp(40px,6.5vw,60px)}.hero-art{min-height:298px;padding:24px 15px}.hero-mark{max-height:158px}
+ .hero h1{font-size:clamp(38px,5.8vw,58px)}.hero-art{min-height:298px;padding:24px 15px}.hero-mark{max-height:158px}
  .app-area{padding:24px}
  .photo-wall{gap:12px}.polaroid{padding:7px}.polaroid figcaption{font-size:11px}
 }
@@ -140,7 +142,7 @@ body:has(#adminView:not(.hidden)) .site-extras{display:none}
  .wrap{padding:0 14px}.nav{height:65px;margin:0 -14px;border-radius:0 0 13px 13px;padding:9px 15px}.brand-logo img{width:132px}.nav-context{font-size:9px;letter-spacing:.8px}
  .nav-context b{padding:0 3px}
  .hero{display:block;padding:37px 2px 28px}
- .hero-kicker{font-size:10px;letter-spacing:.65px}.hero h1{font-size:clamp(41px,11vw,62px);letter-spacing:-2px;margin:16px 0 13px}.hero h1 span{text-shadow:3px 3px 0 var(--navy),-1px 0 var(--navy)}
+ .hero-kicker{font-size:10px;letter-spacing:.65px}.hero h1{font-size:clamp(37px,10vw,54px);letter-spacing:-1.2px;margin:16px 0 15px}.hero h1 span{box-shadow:3px 4px 0 rgba(20,34,54,.13)}
  .hero-question{font-size:21px;line-height:1.5;margin:0 0 20px}
  .hero-actions{gap:12px}.hero-link{padding:11px 15px;font-size:13px}.hero-micro{font-size:11px}
  .hero-art{margin:30px 3px 0;min-height:156px;display:grid;grid-template-columns:118px 1fr;grid-template-rows:auto auto auto;gap:0 11px;padding:18px 20px;align-items:center;justify-items:start;box-shadow:6px 7px 0 #ffd24d}
@@ -149,7 +151,7 @@ body:has(#adminView:not(.hidden)) .site-extras{display:none}
  .app-area{margin:26px 0 0;padding:18px 13px;border-radius:18px;box-shadow:4px 5px 0 #14223b33}.app-area-top h2{font-size:26px}.app-area-top p{font-size:12px}.panel{padding:18px 15px}.panel h2{font-size:17px}
  .tabs{display:flex}.tab{flex:1}.row{flex-direction:column}.row>*{width:100%}
  .how{padding:44px 3px 20px}.how-grid{grid-template-columns:1fr;gap:11px}.how-card{min-height:unset;padding:19px 20px}.how-card h3{margin:15px 0 7px}.how-card p{font-size:12px}.how-symbol{width:32px;height:32px;line-height:27px;font-size:20px}
- .moments{border-radius:18px;margin:30px 0 33px;padding:24px 16px}.moments-heading{gap:12px;margin-bottom:19px}.moments-heading h2{font-size:29px}.moments-doodle{font-size:25px}.photo-wall{grid-template-columns:1fr 1fr;gap:14px 9px;align-items:start;padding:0 7px 14px}.polaroid-third{grid-column:1/3;max-width:75%;justify-self:center}.polaroid figcaption{margin-top:8px;font-size:11px}.moments-fine{font-size:9px;text-align:left}
+ .moments{border-radius:18px;margin:30px 0 33px;padding:24px 16px}.moments-heading{gap:12px;margin-bottom:19px}.moments-heading h2{font-size:29px}.moments-doodle{font-size:25px}.photo-wall{grid-template-columns:1fr 1fr;gap:14px 9px;align-items:start;padding:0 7px 14px}.polaroid-third{grid-column:1/3;max-width:75%;justify-self:center}.polaroid figcaption{margin-top:8px;font-size:11px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}button,.hero-link{transition:none}}
 
@@ -255,10 +257,9 @@ body:has(#adminView:not(.hidden)) .site-extras{display:none}
       <figure class="polaroid polaroid-second"><span class="photo-tape" aria-hidden="true"></span><img src="n8-moment-02.jpg" alt="연습 공간 거울 앞에서 찍은 단체사진" loading="lazy"><figcaption>N8 together <span aria-hidden="true">✦</span></figcaption></figure>
       <figure class="polaroid polaroid-third"><span class="photo-tape" aria-hidden="true"></span><img src="n8-moment-03.png" alt="스윙댄스 행사에서 함께한 단체사진" loading="lazy"><figcaption>스윙으로 이어진 우리 <span aria-hidden="true">★</span></figcaption></figure>
     </div>
-    <p class="moments-fine">* 단체사진은 원본 그대로 사용했습니다. 인물 보정·배경 제거 없이 액자 스타일로만 배치했어요.</p>
   </section>
 </div>
-<footer class="foot"><img src="n8-lindyhoppers.png" alt="N8 Lindyhoppers" width="158" height="32"><p>N8 · 엔에잇 · MT · 비밀마니또</p><p>작은 친절로 완성하는 우리들의 엠티.</p><small>참가자의 추측 정답 여부는 발표 전까지 비밀로 유지됩니다.</small></footer>
+<footer class="foot"><img src="n8-lindyhoppers.png" alt="N8 Lindyhoppers" width="158" height="32"><p>N8 · 엔에잇 · MT · 비밀마니또</p><p>작은 친절로 완성하는 우리들의 엠티.</p><small>참가자의 추측 정답 여부는 발표 전까지 비밀로 유지됩니다.</small><p class="creator">제작자 <strong>바다</strong><span aria-hidden="true"> ✦</span></p></footer>
 </main>
 <script>
 // ====== 배포하기 전 이 두 줄만 변경해 주세요 ======
