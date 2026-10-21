@@ -155,6 +155,13 @@ body:has(#adminView:not(.hidden)) .site-extras{display:none}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}button,.hero-link{transition:none}}
 
+
+/* v3.3: 관리자 참가자 관리 버튼. 모바일에서도 쉽게 누를 수 있게 분리. */
+.participant-tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:7px 0 4px}
+.participant-tools button{font-size:12px;padding:8px 12px;flex:0 0 auto;min-height:36px}
+.participant-tools .danger-action{background:#fff1ef;border:1px solid #e9b4a9;color:#9c3027}
+.participant-tools .danger-action:disabled{opacity:.38}
+.participant-management-note{font-size:12px;color:#5a554f;margin:12px 0 3px;line-height:1.6}
 </style>
 </head><body><main class="wrap">
 <header class="nav">
@@ -229,8 +236,8 @@ body:has(#adminView:not(.hidden)) .site-extras{display:none}
       <div id="dashboardStatus" class="status hidden"></div>
       <div class="line"></div><h2>진행자 빠른 검색</h2><p class="desc">닉네임을 검색하면 배정·선행 메시지·추측 현황을 한꺼번에 좁혀 볼 수 있어요.</p>
       <input class="quick-find" id="adminSearch" oninput="renderAdminLists()" placeholder="찾을 닉네임 입력 (예: 바다)" autocomplete="off">
-      <p class="section-note">명단 옆 'PIN 설정/변경'은 관리자가 참가자의 숫자 4자리 비밀번호를 지정해 주는 기능입니다.</p>
-      <div class="line"></div><h2>참가자 명단</h2><p class="desc">참가자는 초대 링크에서 닉네임으로 등록됩니다. 추첨 후 새 참가자 등록은 마감됩니다.</p><div id="participantList"></div>
+      <p class="section-note">참가자 이름은 추첨 후에도 수정할 수 있으며 기존 PIN·기록은 유지됩니다. 삭제는 기록과 배정에 문제가 없을 때만 허용됩니다.</p>
+      <div class="line"></div><h2>참가자 명단 · 관리자 관리</h2><p class="desc">닉네임 수정 / PIN 재설정 / 참가자 삭제를 관리자만 할 수 있어요. 추첨 후 삭제 시 남은 사람의 배정이 일부 변경될 수 있습니다.</p><div id="participantList"></div>
       <div class="line"></div><div class="row"><button id="drawButton" onclick="runDraw()">마니또 추첨 / 재추첨</button><button class="light" onclick="downloadCSV()">관리 결과 CSV</button></div>
       <p class="small">재추첨은 첫 추측 제출 전까지만 가능합니다. 이미 본 배정이 바뀔 수 있으니 신중하게 진행하세요.</p>
       <div class="line"></div><h2>관리자 전용 배정 결과</h2><p class="desc">색상은 같은 참가자를 뜻해요. 누가 누구를 챙기는지, 역방향 관계까지 빠르게 확인하세요.</p><div id="assignmentList"></div>
@@ -371,7 +378,14 @@ function renderAdminLists(){
   $('participantList').innerHTML=people.length?people.map(p=>{
     const own=targets.get(p.id), incoming=givers.get(p.id);
     const guesses=adminData.guesses.filter(g=>g.participant_id===p.id);
-    return `<div class="mapping-row"><div class="mapping-main">${chip(p.nickname,p.id)} <span class="pill-count">추측 ${guesses.length}/2</span> <span class="badge">${p.has_pin?'PIN 설정됨':'PIN 미설정'}</span><button class="light" style="padding:5px 9px;font-size:12px" onclick="setParticipantPin('${esc(p.id)}')">PIN 설정/변경</button></div>
+    const deleteReason=participantDeleteReason(p);
+    return `<div class="mapping-row"><div class="mapping-main">${chip(p.nickname,p.id)} <span class="pill-count">추측 ${guesses.length}/2</span> <span class="badge">${p.has_pin?'PIN 설정됨':'PIN 미설정'}</span></div>
+      <div class="participant-tools">
+        <button class="light" onclick="renameParticipant('${esc(p.id)}')">✎ 닉네임 수정</button>
+        <button class="light" onclick="setParticipantPin('${esc(p.id)}')">PIN 설정/변경</button>
+        <button class="danger-action" onclick="deleteParticipant('${esc(p.id)}')" ${deleteReason?'disabled':''} title="${esc(deleteReason||'삭제 전 확인창이 나타납니다.')}">참가자 삭제</button>
+        ${deleteReason?`<span class="small">삭제 제한: ${esc(deleteReason)}</span>`:''}
+      </div>
       <div class="mapping-grid"><div class="mapping-cell"><span class="small">이 사람이 챙기는 사람</span>${own?chip(own.receiver,own.receiver_id):'<span class="small">추첨 대기</span>'}</div>
       <div class="mapping-cell"><span class="small">이 사람을 챙기는 사람 (관리자 전용)</span>${incoming?chip(incoming.giver,incoming.giver_id):'<span class="small">추첨 대기</span>'}</div></div></div>`;
   }).join(''):'<p class="small">일치하는 참가자가 없습니다.</p>';
@@ -381,6 +395,53 @@ function renderAdminLists(){
   $('deedList').innerHTML=messages.length?messages.map(m=>`<div class="live-row"><div class="mapping-main">${chip(m.nickname,m.participant_id)} <span class="role-label">→ 챙기는 대상</span> ${m.target_nickname?chip(m.target_nickname,targets.get(m.participant_id)?.receiver_id):'<span class="small">미배정</span>'}</div><p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 2px">${esc(m.message)}</p><div class="small">${esc(datefmt(m.created_at))}</div></div>`).join(''):'<p class="small">해당하는 선행 메시지가 없어요.</p>';
   const guesses=adminData.guesses.filter(g=>matchesAdminSearch(g.participant,g.guessed));
   $('guessList').innerHTML=guesses.length?guesses.map(g=>`<div class="live-row"><div class="mapping-main"><span class="pill-count">${Number(g.attempt_no)||1}차 / 2회</span>${chip(g.participant,g.participant_id)} <span class="role-label">→ 추측한 사람</span> ${chip(g.guessed,g.guessed_id)} <span class="${g.correct?'ok-mark':'no-mark'}">${g.correct?'✓ 정답':'✕ 오답'}</span></div><div class="small">${esc(datefmt(g.created_at))}</div></div>`).join(''):'<p class="small">해당하는 추측 기록이 없어요.</p>';
+}
+// Display guidance is only a convenience. The server/SQL independently
+// checks deletion safety inside a single database transaction.
+function participantDeleteReason(person){
+  if(!adminData)return '데이터를 불러오지 못했어요.';
+  const drawn=adminData.assignments.length>0;
+  if(adminData.guesses.length>0)return '추측 기록이 이미 있어요.';
+  if(adminData.messages.some(m=>m.participant_id===person.id))return '이 참가자가 작성한 선행 기록이 있어요.';
+  if(drawn&&adminData.messages.length>0)return '추첨 후 선행 기록이 있어요.';
+  if(drawn&&adminData.participants.length<3)return '추첨 후에는 최소 2명이 남아야 해요.';
+  return '';
+}
+async function renameParticipant(participantId){
+  if(!adminData)return;
+  const person=adminData.participants.find(p=>p.id===participantId);
+  if(!person)return;
+  const changed=prompt(`${person.nickname} 님의 새 닉네임을 입력해 주세요.\n기존 4자리 PIN과 배정·선행·추측 기록은 유지됩니다.`,person.nickname);
+  if(changed===null)return;
+  const newNickname=changed.trim();
+  if(newNickname.length<1||newNickname.length>30){msg('dashboardStatus','닉네임은 1~30자로 입력해 주세요.',true);return;}
+  if(newNickname===person.nickname)return;
+  if(!confirm(`「${person.nickname}」 → 「${newNickname}」로 변경할까요?\n참가자는 다음 로그인부터 새 닉네임과 기존 PIN을 사용해야 합니다.`))return;
+  try{
+    const result=await api('admin_rename_participant',{participant_id:participantId,new_nickname:newNickname});
+    await refreshAdmin();
+    msg('dashboardStatus',`닉네임을 「${result.previous_nickname}」에서 「${result.nickname}」로 변경했어요. 기존 PIN은 그대로 사용할 수 있어요.`);
+  }catch(e){msg('dashboardStatus',e.message,true);}
+}
+async function deleteParticipant(participantId){
+  if(!adminData)return;
+  const person=adminData.participants.find(p=>p.id===participantId);
+  if(!person)return;
+  const reason=participantDeleteReason(person);
+  if(reason){msg('dashboardStatus',`삭제할 수 없어요: ${reason}`,true);return;}
+  const drawn=adminData.assignments.length>0;
+  const preceding=adminData.assignments.find(a=>a.receiver_id===participantId);
+  const following=adminData.assignments.find(a=>a.giver_id===participantId);
+  let warning=`「${person.nickname}」 참가자를 영구 삭제할까요?\n이 참가자의 기존 로그인도 해제됩니다.`;
+  if(drawn)warning+=`\n\n[추첨 후 삭제 안내]\n${preceding?.giver||'다른 참가자'} 님이 챙기는 대상이 ${following?.receiver||'다른 참가자'} 님으로 바뀝니다.\n이미 확인한 배정은 사람들에게 다시 안내해야 합니다.`;
+  if(!confirm(warning))return;
+  // A second confirmation reduces accidental destructive clicks.
+  if(!confirm(`정말로 「${person.nickname}」 님을 삭제할까요? 이 작업은 취소할 수 없어요.`))return;
+  try{
+    const result=await api('admin_delete_participant',{participant_id:participantId});
+    await refreshAdmin();
+    msg('dashboardStatus',`「${result.nickname}」 님을 삭제했어요.${result.had_draw?' 변경된 배정을 반드시 다시 안내해 주세요.':''}`);
+  }catch(e){msg('dashboardStatus',e.message,true);}
 }
 async function setParticipantPin(participantId){
   if(!adminData)return;
@@ -401,13 +462,12 @@ async function refreshAdmin(){
     adminData=await api('admin_overview');
     $('adminRoomTitle').textContent=adminData.room_name;
     $('adminCount').textContent=`참가 ${adminData.participants.length}명 · ${adminData.assignments.length?'추첨 완료':'추첨 대기'}`;
- 
-const inviteLink = new URL(location.href);
-inviteLink.hash = '';
-inviteLink.search = '';
-inviteLink.searchParams.set('room', adminData.invite_code);
-$('inviteUrl').value = inviteLink.toString();
-
+    // Build the invitation URL without page anchors such as #start or #top.
+    const inviteLink = new URL(location.href);
+    inviteLink.hash = '';
+    inviteLink.search = '';
+    inviteLink.searchParams.set('room', adminData.invite_code);
+    $('inviteUrl').value = inviteLink.toString();
     renderAdminLists();
     $('drawButton').disabled=!adminData.can_redraw;
     if(!adminData.can_redraw) $('drawButton').title='추측 제출 후에는 재추첨할 수 없습니다.';
@@ -435,18 +495,11 @@ function downloadCSV(){
 async function logout(){const old=active;active=null;participantData=null;adminData=null;sessionStorage.removeItem(STORE);authPanels();if(old?.token)try{await api('logout',{},old.token);}catch{};}
 async function resume(){
   if(!configured())$('configWarning').classList.remove('hidden');
-
-const params = new URLSearchParams(location.search);
-const legacyHashQuery = location.hash.includes('?')
-  ? location.hash.slice(location.hash.indexOf('?') + 1)
-  : '';
-const roomFromInvite = params.get('room')
-  || new URLSearchParams(legacyHashQuery).get('room');
-
-if (roomFromInvite) {
-  $('userRoom').value = roomFromInvite.trim().toUpperCase();
-}
-
+  // Accept canonical ?room= links as well as previously shared #start?room= links.
+  const params = new URLSearchParams(location.search);
+  const legacyHashQuery = location.hash.includes('?') ? location.hash.slice(location.hash.indexOf('?')+1) : '';
+  const roomFromInvite = params.get('room') || new URLSearchParams(legacyHashQuery).get('room');
+  if (roomFromInvite) $('userRoom').value = roomFromInvite.trim().toUpperCase();
   try{active=JSON.parse(sessionStorage.getItem(STORE)||'null');}catch{active=null;}
   if(!active||!active.token||Date.parse(active.expires_at)<=Date.now()){active=null;sessionStorage.removeItem(STORE);authPanels();return;}
   authPanels();try{if(active.role==='admin')await refreshAdmin();else if(active.role==='participant')await refreshParticipant();else await logout();}
