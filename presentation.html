@@ -24,8 +24,8 @@ main{max-width:1640px;padding:24px clamp(15px,3.5vw,55px) 28px;margin:auto}h1,h2
 <header><a class="brand" href="./index.html"><img src="n8-lindyhoppers.png" alt="N8 Lindyhoppers"><span>MT 비밀마니또 <span style="color:#ffde55">LIVE</span></span></a><span class="chip">SATURDAY NIGHT · REVEAL SHOW</span></header>
 <main>
 <section id="loginScreen" class="setup-wrap"><div class="card setup"><div class="eyebrow">N8 MT · HOST ONLY</div><h1>토요일 밤,<br>비밀을 공개할 시간!</h1><p class="sub">빔프로젝터에 띄울 <b>결과 발표 전용 페이지</b>야. 기존 N8 마니또 관리자 계정으로 로그인하면 기록을 불러와 사회자가 한 장씩 공개할 수 있어.</p><div id="configError" class="alert hidden">Supabase 주소와 Publishable Key를 먼저 설정해 줘. 배포 설명서를 확인해 줘.</div><form class="form" id="loginForm"><label class="field">관리자 번호<input id="adminNumber" inputmode="numeric" autocomplete="username" placeholder="기존 관리자 번호" required></label><label class="field">관리자 비밀번호<input id="adminPassword" type="password" autocomplete="current-password" placeholder="기존 관리자 비밀번호" required></label><button id="loginButton" type="submit" class="primary">관리자 로그인하고 발표 준비하기 →</button></form><p id="loginError" class="alert hidden" role="alert"></p><p class="micro">관리자만 전체 배정 결과와 추측 정답을 불러올 수 있어. 발표 화면은 버튼을 누르기 전까지 정답을 공개하지 않아.</p></div></section>
-<section id="lobbyScreen" class="lobby hidden"><div class="card"><div class="eyebrow">PRESENTER'S DESK</div><h2>발표 시작점 선택</h2><p class="sub" style="font-size:14px">처음 발표할 사람을 선택해 줘. 이후에는 <b>그 사람을 챙겨준 마니또</b>를 따라 자동으로 이어져.</p><input id="findPerson" class="search" type="search" placeholder="닉네임 검색" aria-label="참가자 검색"><div id="roster" class="roster"></div></div><div class="selected"><div class="spark" aria-hidden="true">✦</div><div style="letter-spacing:.17em;color:#ffde55;font-weight:900">WHO'S YOUR SECRET PAL?</div><h2 id="selectedName">시작할 참가자를<br>선택해 줘!</h2><button id="startButton" class="secondary" disabled>이 사람부터 발표 시작 →</button><div class="lobby-stats" id="lobbyStats"></div><p class="small" style="font-size:13px;margin-top:22px;color:#bbc2d0">진행 중에는 키보드 → / ← 로 다음·이전 장면 이동</p><button id="logoutButton" class="ghost" style="margin-top:10px">로그아웃</button></div></section>
-<section id="showScreen" class="stage-shell hidden"><div id="stage" class="stage" aria-live="polite"></div><div class="controls"><button class="control-soft" id="backButton">← 이전</button><button class="primary control-dark" id="nextButton">다음 공개 →</button><span class="small" id="counter">1 / 1</span><button class="control-soft" id="fullscreenButton">⛶ 전체화면</button><button class="control-soft" id="refreshButton">↻ 최신 기록</button><button class="control-soft" id="lobbyButton">참가자 선택</button></div><div class="footline">진행자 전용 · 비밀 공개는 화면의 「다음 공개」 버튼을 눌렀을 때만 진행돼 · 실시간 기록은 20초마다 동기화 · 제작자 바다 ✦</div><p id="showError" class="alert hidden" role="alert"></p></section>
+<section id="lobbyScreen" class="lobby hidden"><div class="card"><div class="eyebrow">PRESENTER'S DESK</div><h2>발표 시작점 선택</h2><p class="sub" style="font-size:14px">먼저 <b>선행을 받은 사람</b>을 선택해 줘. 그 사람을 챙겨준 마니또의 메시지와 추측 결과를 공개한 뒤, <b>공개된 마니또가 다음 주인공</b>이 돼.</p><input id="findPerson" class="search" type="search" placeholder="닉네임 검색" aria-label="참가자 검색"><div id="roster" class="roster"></div></div><div class="selected"><div class="spark" aria-hidden="true">✦</div><div style="letter-spacing:.17em;color:#ffde55;font-weight:900">WHO'S YOUR SECRET PAL?</div><h2 id="selectedName">시작할 참가자를<br>선택해 줘!</h2><button id="startButton" class="secondary" disabled>이 사람부터 발표 시작 →</button><div class="lobby-stats" id="lobbyStats"></div><p class="small" style="font-size:13px;margin-top:22px;color:#bbc2d0">진행 중에는 키보드 → / ← 로 다음·이전 장면 이동</p><button id="logoutButton" class="ghost" style="margin-top:10px">로그아웃</button></div></section>
+<section id="showScreen" class="stage-shell hidden"><div id="stage" class="stage" aria-live="polite"></div><div class="controls"><button class="control-soft" id="backButton">← 이전</button><button class="primary control-dark" id="nextButton">다음 공개 →</button><span class="small" id="counter">1 / 1</span><button class="control-soft" id="fullscreenButton">⛶ 전체화면</button><button class="control-soft" id="refreshButton">↻ 최신 기록</button><button class="control-soft" id="lobbyButton">참가자 선택</button></div><div class="footline">진행자 전용 · 메시지는 주인공을 챙긴 마니또가 작성한 기록 · 정답은 「다음 공개」를 눌러야 등장 · 제작자 바다 ✦</div><p id="showError" class="alert hidden" role="alert"></p></section>
 </main>
 <script>
 'use strict';
@@ -37,7 +37,8 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Nf7VkuMV4s9j6q6Vp5Dj4g_RjZYd_Pg
 const $ = id => document.getElementById(id);
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const configured = () => /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(SUPABASE_PROJECT_URL) && SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_');
-let authToken = null, overview = null, selectedId = null, firstId = null, currentId = null, phase = 0, messageIndex = 0, history = [], completed = false;
+let authToken = null, overview = null, selectedId = null, firstId = null, currentId = null, phase = 0, history = [], completed = false;
+let shownPeople = new Set(), chainBreakTo = null, showSnapshot = null;
 const STORE = 'n8.manitto.presentation.session.v1';
 let currentlySyncing = false, lastSync = 0;
 async function api(action, params = {}, token = authToken) {
@@ -52,10 +53,30 @@ async function api(action, params = {}, token = authToken) {
 }
 function showError(message,id='showError'){const el=$(id);el.textContent=message;el.classList.remove('hidden');}
 function clearError(id){$(id).textContent='';$(id).classList.add('hidden');}
-const person = id => overview?.participants?.find(p=>p.id===id);
-const guardian = id => overview?.assignments?.find(a=>a.receiver_id===id)?.giver_id || null;
-const subjectDeeds = id => (overview?.messages || []).filter(m=>m.participant_id===id).slice().sort((a,b)=>Date.parse(a.created_at)-Date.parse(b.created_at));
-const subjectGuesses = id => (overview?.guesses || []).filter(g=>g.participant_id===id).slice().sort((a,b)=>Number(a.attempt_no)-Number(b.attempt_no));
+// The reveal shows deeds RECEIVED by the subject, not deeds WRITTEN by the subject.
+// An existing good_deed_messages row records the writer (giver), not the receiver.
+// The currently assigned receiver is inferred from the assignment giver_id -> receiver_id.
+const view = () => showSnapshot || overview;
+const person = id => view()?.participants?.find(p=>p.id===id);
+const guardian = id => view()?.assignments?.find(a=>a.receiver_id===id)?.giver_id || null;
+const subjectDeeds = id => {
+  const author = guardian(id);
+  if(!author)return [];
+  return (view()?.messages || []).filter(m=>m.participant_id===author).slice().sort((a,b)=>Date.parse(a.created_at)-Date.parse(b.created_at));
+};
+const subjectGuesses = id => (view()?.guesses || []).filter(g=>g.participant_id===id).slice().sort((a,b)=>Number(a.attempt_no)-Number(b.attempt_no));
+// A valid manitto draw is a permutation: exactly one giver and one receiver per person.
+function validDraw(data){
+  if(!data?.participants?.length || data.assignments?.length !== data.participants.length)return false;
+  const ids=new Set(data.participants.map(p=>p.id));
+  const receivers=new Set(), givers=new Set();
+  for(const a of data.assignments){
+    if(!ids.has(a.giver_id)||!ids.has(a.receiver_id)||a.giver_id===a.receiver_id||receivers.has(a.receiver_id)||givers.has(a.giver_id))return false;
+    receivers.add(a.receiver_id);givers.add(a.giver_id);
+  }
+  return receivers.size === ids.size && givers.size === ids.size;
+}
+
 function showOnly(screen){for(const id of ['loginScreen','lobbyScreen','showScreen'])$(id).classList.toggle('hidden',id!==screen);}
 async function fetchOverview(){
   if(currentlySyncing || !authToken)return;
@@ -83,7 +104,7 @@ async function login(event){
   }catch(e){showError(e.message,'loginError');}
   finally{btn.disabled=false;btn.textContent='관리자 로그인하고 발표 준비하기 →';}
 }
-function logout(){authToken=null;sessionStorage.removeItem(STORE);overview=null;selectedId=null;history=[];completed=false;showOnly('loginScreen');$('adminPassword').value='';}
+function logout(){authToken=null;sessionStorage.removeItem(STORE);overview=null;showSnapshot=null;selectedId=null;history=[];shownPeople=new Set();chainBreakTo=null;completed=false;showOnly('loginScreen');$('adminPassword').value='';}
 function showLobby(){
   showOnly('lobbyScreen');$('selectedName').textContent='시작할 참가자를 선택해 줘!';$('startButton').disabled=true;selectedId=null;renderRoster();
   $('lobbyStats').innerHTML = `<div class="stat">모임 · ${escapeHtml(overview.room_name)}</div><div class="stat">참가 ${overview.participants.length}명</div><div class="stat">배정 ${overview.assignments.length}명</div>`;
@@ -94,57 +115,77 @@ function renderRoster(){
  $('roster').innerHTML=people.map((p,i)=>({p,i})).filter(({p})=>p.nickname.toLowerCase().includes(q)).map(({p,i})=>`<button class="person-button ${p.id===selectedId?'active':''}" data-person="${escapeHtml(p.id)}"><span class="number">${String(i+1).padStart(2,'0')}</span><span>${escapeHtml(p.nickname)}</span></button>`).join('')||'<p class="micro">검색 결과가 없어.</p>';
 }
 function pick(id){
- const p=person(id);if(!p)return;selectedId=id;$('selectedName').textContent=p.nickname;$('startButton').disabled=overview.assignments.length!==overview.participants.length || !guardian(id);renderRoster();
+ const p=person(id);if(!p)return;selectedId=id;$('selectedName').textContent=p.nickname;$('startButton').disabled=!validDraw(overview) || !guardian(id);renderRoster();
 }
 const slide = (tag,inner) => `<div class="slide"><div class="tag">${tag}</div>${inner}</div>`;
 function phaseMax(){return 4 + subjectDeeds(currentId).length;} // phase 0 intro, 1 count, 2.. messages, then verdict, suspense, reveal
 function stageMarkup(){
-  if(completed) return slide('N8 MT · SECRET PAL REVEAL',`<div class="emblem">✦ ✦ ✦</div><h2 class="completed">마니또 한 바퀴<br>공개 완료!</h2><div class="subtitle">모든 연결이 다시 처음 사람에게 돌아왔어 🎉</div>`);
+  if(completed) return slide('N8 MT · SECRET PAL REVEAL',`<div class="emblem">✦ ✦ ✦</div><h2 class="completed">모든 마니또<br>공개 완료!</h2><div class="subtitle">${shownPeople.size}명의 비밀 연결을 모두 확인했어 🎉</div>`);
+  if(chainBreakTo){return slide('NEW SECRET PAL CHAIN',`<div class="emblem">✦ ✦ ✦</div><h2>다른 비밀 연결도<br><span class="bright">계속 공개할게!</span></h2><div class="subtitle">이번 연결은 한 바퀴를 마쳤어. 다음 주인공은 ${escapeHtml(person(chainBreakTo)?.nickname ?? '새 참가자')}!</div>`);}
   const name=escapeHtml(person(currentId)?.nickname ?? '알 수 없는 참가자');
   const deeds=subjectDeeds(currentId);const guesses=subjectGuesses(currentId);
   const max=phaseMax();
-  if(phase===0)return slide('N8 MT · SECRET PAL REVEAL',`<div class="emblem">✦</div><h2>오늘의 주인공은<br><span class="bright">${name}</span>!</h2><div class="subtitle">마니또의 비밀을 하나씩 공개합니다</div>`);
-  if(phase===1)return slide('GOOD DEED · MESSAGE COUNT',`<h2><span class="bright">${name}</span> 님이<br>남긴 선행 기록</h2><div class="big-num">${deeds.length}<span style="font-size:.28em;color:white">개</span></div>`);
+  if(phase===0)return slide('N8 MT · SECRET PAL REVEAL',`<div class="emblem">✦</div><h2>이번에 도움받은 사람은<br><span class="bright">${name}</span>!</h2><div class="subtitle">${name} 님을 누가 몰래 챙겼는지 공개할게!</div>`);
+  if(phase===1)return slide('GOOD DEED · RECEIVED MESSAGES',`<h2><span class="bright">${name}</span> 님에게<br>도착한 선행 메시지</h2><div class="big-num">${deeds.length}<span style="font-size:.28em;color:white">개</span></div><div class="subtitle">마니또가 ${name} 님을 위해 남긴 기록!${deeds.length===0?' (등록된 메시지가 없어요)':''}</div>`);
   if(phase>=2&&phase<2+deeds.length){
-    const m=deeds[phase-2];return slide(`GOOD DEED · ${phase-1} / ${deeds.length}`,`<h2 style="font-size:clamp(30px,4.1vw,66px);margin-bottom:clamp(16px,3vw,43px)"><span class="bright">${name}</span> 님의 선행 기록</h2><div class="message-card">${escapeHtml(m.message)}</div><div class="message-meta">선행 메시지 ${phase-1} / ${deeds.length}</div>`);
+    const m=deeds[phase-2];return slide(`GOOD DEED · ${phase-1} / ${deeds.length}`,`<h2 style="font-size:clamp(30px,4.1vw,66px);margin-bottom:clamp(16px,3vw,43px)"><span class="bright">${name}</span> 님에게 온 선행 메시지</h2><div class="message-card">${escapeHtml(m.message)}</div><div class="message-meta">선행 메시지 ${phase-1} / ${deeds.length} · 작성자 정체는 잠시 후!</div>`);
   }
   const verdictPhase=2+deeds.length;
   if(phase===verdictPhase){
     const lookup=new Map(guesses.map(g=>[Number(g.attempt_no),g]));
     let cards=[1,2].map(n=>{const g=lookup.get(n);const status=!g?'none':g.correct?'correct':'wrong';const symbol=!g?'미제출':g.correct?'O':'X';return `<div class="guess-card ${status}"><div class="label">${n}차 추측</div><strong>${symbol}</strong></div>`;}).join('');
-    return slide('DID YOU GUESS IT?',`<h2><span class="bright">${name}</span> 님은<br>마니또를 맞혔을까?</h2><div class="guess-row">${cards}</div><div class="subtitle">추측 결과는 O / X로만 공개합니다</div>`);
+    return slide('DID YOU GUESS IT?',`<h2><span class="bright">${name}</span> 님은<br>자신의 마니또를 맞혔을까?</h2><div class="guess-row">${cards}</div><div class="subtitle">추측 결과는 O / X로만 공개합니다</div>`);
   }
   if(phase===verdictPhase+1)return slide('WHO IS YOUR SECRET PAL?',`<div class="emblem">?</div><h2><span class="bright">${name}</span> 님을<br>몰래 챙긴 사람은?</h2><div class="subtitle">다음 공개를 눌러 정답을 확인해 주세요!</div>`);
   const pal=escapeHtml(person(guardian(currentId))?.nickname ?? '미확인');
-  return slide('THE SECRET PAL IS…',`<div class="emblem">★</div><h2><span class="bright">${name}</span> 님의<br>비밀마니또는…</h2><h2 class="person-head" style="font-size:clamp(43px,7.3vw,132px);margin-top:clamp(15px,2.8vw,40px)">${pal}!</h2><div class="subtitle">그렇다면 ${pal} 님의 마니또는 누구일까? →</div>`);
+  return slide('THE SECRET PAL IS…',`<div class="emblem">★</div><h2><span class="bright">${name}</span> 님의<br>비밀마니또는…</h2><h2 class="person-head" style="font-size:clamp(43px,7.3vw,132px);margin-top:clamp(15px,2.8vw,40px)">${pal}!</h2><div class="subtitle">다음 주인공은 ${pal} 님! 그분에게 온 선행도 확인해 볼까? →</div>`);
 }
 function renderStage(){
- if(!overview)return;
+ if(!view())return;
  $('stage').innerHTML=stageMarkup();
  const max=phaseMax();
  const final=!completed && phase===max;
- $('nextButton').textContent=completed?'발표 종료':final?'다음 참가자 →':'다음 공개 →';
+ $('nextButton').textContent=completed?'발표 종료':chainBreakTo?'새 연결 시작 →':final?'다음 참가자 →':'다음 공개 →';
  $('backButton').disabled=history.length===0;
- $('counter').textContent=completed?'발표 완료':`${phase+1} / ${max+1} 장면`;
+ $('counter').textContent=completed?'발표 완료':chainBreakTo?'새 연결 준비':`${phase+1} / ${max+1} 장면 · ${shownPeople.size}/${view().participants.length}명`; 
 }
-function remember(){history.push({currentId,phase,completed});if(history.length>500)history.shift();}
+function remember(){history.push({currentId,phase,completed,chainBreakTo,shownPeople:[...shownPeople]});if(history.length>500)history.shift();}
 function nextSlide(){
- if(completed){ if(confirm('발표를 마치고 참가자 선택 화면으로 돌아갈까?'))backToLobby();return; }
- const max=phaseMax();remember();
+ if(completed){if(confirm('발표를 마치고 참가자 선택 화면으로 돌아갈까?'))backToLobby();return;}
+ remember();
+ if(chainBreakTo){currentId=chainBreakTo;chainBreakTo=null;shownPeople.add(currentId);phase=0;renderStage();return;}
+ const max=phaseMax();
  if(phase<max){phase++;renderStage();return;}
- const follow=guardian(currentId);
- if(!follow || follow===firstId || history.some(h=>h.currentId===follow && h.phase===0))completed=true;
- else {currentId=follow;phase=0;}
+ const next=guardian(currentId);
+ if(next && !shownPeople.has(next)){
+   currentId=next;shownPeople.add(next);phase=0;
+ }else{
+   // Not every random derangement is one long cycle; start another cycle if necessary.
+   const nextCycle=view().participants.find(p=>!shownPeople.has(p.id)&&guardian(p.id));
+   if(nextCycle)chainBreakTo=nextCycle.id;
+   else completed=true;
+ }
  renderStage();
 }
-function prevSlide(){const h=history.pop();if(!h)return;currentId=h.currentId;phase=h.phase;completed=h.completed;renderStage();}
+function prevSlide(){const h=history.pop();if(!h)return;currentId=h.currentId;phase=h.phase;completed=h.completed;chainBreakTo=h.chainBreakTo;shownPeople=new Set(h.shownPeople);renderStage();}
 function startShow(){
- if(!selectedId||!guardian(selectedId))return;
- if(!overview?.assignments?.length)return;
- firstId=selectedId;currentId=selectedId;phase=0;completed=false;history=[];showOnly('showScreen');renderStage();
+ if(!selectedId || !validDraw(overview) || !guardian(selectedId)){
+   alert('아직 추첨이 완료되지 않았거나 배정 결과가 올바르지 않아. 관리자 화면에서 먼저 확인해 줘.');return;
+ }
+ // Freeze the reveal at the moment the show begins so later registrations or changes
+ // cannot unexpectedly change the presenter’s answer mid-slide.
+ showSnapshot=structuredClone(overview);
+ firstId=selectedId;currentId=selectedId;phase=0;completed=false;chainBreakTo=null;history=[];shownPeople=new Set([selectedId]);
+ showOnly('showScreen');renderStage();
 }
-function backToLobby(){if(!confirm('발표 화면을 나가서 시작 참가자를 다시 선택할까? 기존 데이터는 변경되지 않아.'))return;showLobby();}
-async function syncNow(){const ok=await fetchOverview();if(!ok)return;if(!$('lobbyScreen').classList.contains('hidden'))renderRoster();else if(!$('showScreen').classList.contains('hidden')){renderStage();}}
+function backToLobby(){if(!confirm('발표 화면을 나가서 시작 참가자를 다시 선택할까? 기존 데이터는 변경되지 않아.'))return;showSnapshot=null;showLobby();}
+async function syncNow(){
+ if(!showSnapshot){const ok=await fetchOverview();if(ok&&!$('lobbyScreen').classList.contains('hidden'))renderRoster();return;}
+ if(!confirm('최신 데이터를 불러오면 진행 중인 발표가 처음으로 돌아가. 새로 불러올까?'))return;
+ const ok=await fetchOverview();if(!ok)return;
+ // Refresh only through an explicit restart; never silently modify secret assignments.
+ showSnapshot=null;showLobby();
+}
 async function goFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(e){showError('전체화면 전환 실패: '+e.message);}}
 function handleKeys(e){if($('showScreen').classList.contains('hidden'))return;if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(document.activeElement?.tagName))return;if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();nextSlide();}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prevSlide();}}
 $('loginForm').addEventListener('submit',login);
@@ -159,8 +200,9 @@ $('refreshButton').addEventListener('click',syncNow);
 $('fullscreenButton').addEventListener('click',goFullscreen);
 document.addEventListener('keydown',handleKeys);
 document.addEventListener('fullscreenchange',()=>{$('fullscreenButton').textContent=document.fullscreenElement?'전체화면 종료':'⛶ 전체화면';});
-// 20-second polling while the presenter's page is visible; current reveal phase does not advance on its own.
-setInterval(async()=>{if(authToken&&overview&&document.visibilityState==='visible'&&Date.now()-lastSync>=19000) await fetchOverview();},20000);
+// Lobby data refreshes every 20s, but the live presentation is a frozen snapshot.
+// The presenter can explicitly restart from updated data using '최신 기록'.
+setInterval(async()=>{if(authToken&&overview&&!showSnapshot&&document.visibilityState==='visible'&&Date.now()-lastSync>=19000) await fetchOverview();},20000);
 if(!configured())$('configError').classList.remove('hidden');
 // This dedicated page intentionally asks the host to log in separately.
 // Never put an admin credential or token in the URL.
